@@ -2,7 +2,8 @@
  * The Disc interface defines the characteristics of a game in a chess-like game.
  * Implementing classes should provide information about the player who owns the Disc.
  */
-public interface Disc {
+public interface
+Disc {
 
     /**
      * Get the player who owns the Disc.
