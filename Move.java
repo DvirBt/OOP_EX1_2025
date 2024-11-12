@@ -1,33 +1,38 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Move {
 
-    private int x;
-    private int y;
+    // List<Position> positions;
+    private Position position;
 
-    protected int number_of_flips;
+    private Disc disc;
 
+    private GameLogic game;
 
-    public Move(Player p)
+    public Move(AIPlayer p, GameLogic game)
     {
-        p.
+        //positions = game.ValidMoves(); // get all the possible moves
+        p.makeMove(game);
     }
 
-    public boolean MakeMove(GameLogic game)
+    public Move()
     {
 
-        if (game.isGameFinished())
-        {
-            return false;
-        }
+    }
 
-        for (int i = 0; i < game.getBoardSize(); i++)
+    public Move(GameLogic game)
+    {
+        if (!game.getFirstPlayer().isHuman())
         {
-            for (int j = 0; j < game.getBoardSize(); j++)
-            {
-                if (game.)
-            }
+
         }
+    }
+
+    public Move(GameLogic game, Position position, Disc disc)
+    {
+        this.game = new GameLogic(game);
+
     }
 
     public ArrayList<Move> getAllMoves(GameLogic game, Position p)

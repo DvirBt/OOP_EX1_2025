@@ -1,38 +1,37 @@
 public class Position {
 
-    private int x;
-    private int y;
+    private int row;
+    private int col;
 
+//    public Position()
+//    {
+//        this.x = 0;
+//        this.y = 0;
+//    }
 
-    public Position()
+    public Position(int row, int col)
     {
-        this.x = 0;
-        this.y = 0;
+        this.row = row;
+        this.col = col;
     }
 
-    public Position(int x, int y)
+    public int getRow()
     {
-        this.x = x;
-        this.y = y;
+        return this.row;
     }
 
-    public int getX()
+    public int getCol()
     {
-        return this.x;
-    }
-
-    public int getY()
-    {
-        return this.y;
+        return this.col;
     }
 
     public String toString()
     {
-        return "(" + this.x + "," + this.y + ")";
+        return "(" + this.row + "," + this.col + ")";
     }
 
     public Position getPosition()
     {
-        return new Position(this.x, this.y);
+        return new Position(this.row, this.col);
     }
 }

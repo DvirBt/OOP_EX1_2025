@@ -1,4 +1,4 @@
-public abstract class UnflippableDisc implements Disc {
+public class UnflippableDisc implements Disc {
 
     protected Player player;
 

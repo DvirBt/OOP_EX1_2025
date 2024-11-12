@@ -1,7 +1,6 @@
-public abstract class SimpleDisc implements Disc{
+public class SimpleDisc implements Disc{
 
-    protected Player player;
-
+    private Player player;
     public Player getOwner()
     {
         return this.player;

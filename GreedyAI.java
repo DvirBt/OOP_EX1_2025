@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.*;
 
-public abstract class GreedyAI extends AIPlayer {
+public class GreedyAI extends AIPlayer {
 
     public GreedyAI(boolean isPlayerOne)
     {
@@ -8,23 +9,43 @@ public abstract class GreedyAI extends AIPlayer {
     }
 
     // This function gets an array of moves and returns the move with the most flips
-    public static Move GreedyMove(ArrayList<Move> moves)
+    public Move makeMove(PlayableLogic game)
     {
-        // init
-        int max_moves = moves.getFirst().number_of_flips;
-        Move move = moves.getFirst();
+        List<Position> positions = game.ValidMoves();
+        Position max_position = positions.getFirst();
+        int max_flips = game.countFlips(max_flips);
 
-        for (int i = 1; i < moves.size(); i++)
+        for (int i = 1; i < positions.size(); i++)
         {
-            Move current_move = moves.get(i); // get the current move
-            if (current_move.number_of_flips > max_moves) // check if the current move has the most number of flips
+            int temp = game.countFlips(positions.get(i));
+            if (temp > max_flips)
             {
-                // update the move to be returned to the current move
-                max_moves = current_move.number_of_flips;
-                move = current_move;
+                max_flips = temp;
+                max_position = positions.get(i);
             }
         }
 
-        return move;
+        Move move = new Move(game, max_position, );// add disc
+
+
+
+
+
+//        // init
+//        int max_moves = moves.getFirst().number_of_flips;
+//        Move move = moves.getFirst();
+//
+//        for (int i = 1; i < moves.size(); i++)
+//        {
+//            Move current_move = moves.get(i); // get the current move
+//            if (current_move.number_of_flips > max_moves) // check if the current move has the most number of flips
+//            {
+//                // update the move to be returned to the current move
+//                max_moves = current_move.number_of_flips;
+//                move = current_move;
+//            }
+//        }
+//
+//        return move;
     }
 }

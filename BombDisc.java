@@ -1,4 +1,4 @@
-public abstract class BombDisc implements Disc{
+public class BombDisc implements Disc{
 
     protected Player player;
 
@@ -14,6 +14,6 @@ public abstract class BombDisc implements Disc{
 
     public String getType()
     {
-        return   "💣";
+        return "💣";
     }
 }
