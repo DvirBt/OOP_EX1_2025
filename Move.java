@@ -1,42 +1,37 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Move {
-
-    // List<Position> positions;
-    private Position position;
-
-    private Disc disc;
-
-    private GameLogic game;
-
-    public Move(AIPlayer p, GameLogic game)
-    {
-        //positions = game.ValidMoves(); // get all the possible moves
-        p.makeMove(game);
-    }
+    private Position position; // position of the new disc
+    private Disc disc; // the disc to place
+    private Disc[][] board; // the current status of the borad
 
     public Move()
     {
-
+        
     }
 
-    public Move(GameLogic game)
+    public Move(Position position, Disc disc, Disc[][] board)
     {
-        if (!game.getFirstPlayer().isHuman())
-        {
-
-        }
+        this.position = position;
+        this.disc = disc;
+        this.board = board;
     }
 
     public Move(GameLogic game, Position position, Disc disc)
     {
-        this.game = new GameLogic(game);
+        //this.game = new GameLogic(game);
 
     }
 
-    public ArrayList<Move> getAllMoves(GameLogic game, Position p)
-    {
-        Disc disc = game.getDiscAtPosition(p);
-    }
+
+
+//    public PlayableLogic Undo(Stack<PlayableLogic> games)
+//    {
+//        if (!games.empty())
+//            return games.pop();
+//
+//        return null; // no previous
+//    }
 }

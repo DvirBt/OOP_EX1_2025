@@ -1,13 +1,6 @@
 public class Position {
 
-    private int row;
-    private int col;
-
-//    public Position()
-//    {
-//        this.x = 0;
-//        this.y = 0;
-//    }
+    private int row, col;
 
     public Position(int row, int col)
     {
@@ -28,10 +21,5 @@ public class Position {
     public String toString()
     {
         return "(" + this.row + "," + this.col + ")";
-    }
-
-    public Position getPosition()
-    {
-        return new Position(this.row, this.col);
     }
 }

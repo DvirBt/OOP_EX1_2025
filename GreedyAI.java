@@ -13,19 +13,20 @@ public class GreedyAI extends AIPlayer {
     {
         List<Position> positions = game.ValidMoves();
         Position max_position = positions.getFirst();
-        int max_flips = game.countFlips(max_flips);
+        int max_flips = game.countFlips(max_position);
+        int current_flips;
 
         for (int i = 1; i < positions.size(); i++)
         {
-            int temp = game.countFlips(positions.get(i));
-            if (temp > max_flips)
+            current_flips = game.countFlips(positions.get(i));
+            if (current_flips > max_flips)
             {
-                max_flips = temp;
+                max_flips = current_flips;
                 max_position = positions.get(i);
             }
         }
 
-        Move move = new Move(game, max_position, );// add disc
+        //Move move = new Move(game, max_position, );// add disc
 
 
 
@@ -47,5 +48,7 @@ public class GreedyAI extends AIPlayer {
 //        }
 //
 //        return move;
+
+        return null;
     }
 }

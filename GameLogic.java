@@ -6,8 +6,7 @@ public class GameLogic implements PlayableLogic {
 
     private final int row_board = 8; // determines the length of the board
     private final int col_board = 8; // determines the width of the board
-    private Player player1;
-    private Player player2;
+    private Player player1, player2;
     private int discs_counter;
     //private boolean status; // determines the status of the game.
     private boolean turn; // false - player 1, true - player 2
@@ -15,11 +14,13 @@ public class GameLogic implements PlayableLogic {
     //private List<Position> positions;
     private List<Move> moves;
 
-    private List<Disc> p1_discs;
-    private List<Disc> p2_discs;
+    private ArrayList<Disc> discs_list;
+
+    // private List<Disc> p1_discs;
 
     public GameLogic()
     {
+        // init stats
         this.player1 = new HumanPlayer(true);
         this.player2 = new HumanPlayer(false);
         this.discs_counter = 4;
@@ -32,6 +33,14 @@ public class GameLogic implements PlayableLogic {
         disc.setOwner(player2);
         discs_mat[3][4] = disc;
         discs_mat[4][3] = disc;
+        //
+
+//        while (!isGameFinished()) // as long as the game is not finished
+//        {
+//            Disc disc =
+//        }
+//
+//        if (this.player1.)
     }
 
     public GameLogic(GameLogic game)
@@ -61,6 +70,21 @@ public class GameLogic implements PlayableLogic {
     }
 
     /**
+     * Get the current player who's playing.
+     *
+     * @return the player who's currently is playing.
+     */
+
+    private Player current_player()
+    {
+        if (isFirstPlayerTurn())
+            return player1;
+
+        return player2;
+    }
+
+
+    /**
      * Attempt to locate a disc on the game board.
      *
      * @param a The position for locating a new disc on the board.
@@ -68,18 +92,49 @@ public class GameLogic implements PlayableLogic {
      */
     public boolean locate_disc(Position a, Disc disc)
     {
+        Player current_player = current_player();
         List<Position> valid_moves = ValidMoves();
         for (int i = 0; i < valid_moves.size(); i++)
             if (valid_moves.contains(a)) // if a is a valid move
             {
+                // make move
+                Move move = new Move();
+                //
                 discs_mat[a.getRow()][a.getCol()] = disc;
                 this.discs_counter++; // add 1 to the counter
                 this.turn = !this.turn; // turn changes
+                // make move / flip
+                flip(current_player, a); // make the flip
+                //
                 return true;
             }
 
         return false;
     }
+
+    //
+
+    private void flip(Player player, Position position)
+    {
+        Position[] directions = directions();
+        Player owner = current_player();
+
+        for (int i = 0; i < directions().length; i++)
+        {
+            int counter = count(owner, position, directions[i]);
+            if (counter > 0)
+            {
+                for (int j = 0; j < counter; j++)
+                {
+                    Position flip_position = new Position(position.getRow() + directions[i].getRow(), position.getCol() + directions[i].getCol());
+                    Disc disc = getDiscAtPosition(flip_position);
+                    disc.setOwner(owner);
+                }
+            }
+        }
+    }
+
+    //
 
     /**
      * Get the disc located at a given position on the game board.
@@ -132,11 +187,11 @@ public class GameLogic implements PlayableLogic {
     }
 
     /**
-     * Indicates if a disc in a given position belongs to the given player.
+     * Indicates if a disc in a given position belongs to the enemy player.
      *
      * @param player The current player.
      * @param  position A given position.
-     * @return True if in the given position there is an enemy's disc. Otherwise returns false.
+     * @return True if in the given position there is an enemy's disc. Otherwise, returns false.
      */
 
     private boolean enemyDisc(Player player, Position position)
@@ -149,7 +204,7 @@ public class GameLogic implements PlayableLogic {
     }
 
     /**
-     * Count the number of flips in a row to the right from a given position.
+     * Count the number of flips from a given position.
      *
      * @param player The current player.
      * @param  position A given position.
@@ -174,7 +229,6 @@ public class GameLogic implements PlayableLogic {
 
             else // null, no disc at the position
                 break;
-
         }
 
         return 0;
@@ -292,7 +346,7 @@ public class GameLogic implements PlayableLogic {
      */
     public void reset()
     {
-        this();
+        PlayableLogic game = new GameLogic();
     }
 
     /**
